@@ -3583,21 +3583,16 @@
             initializeTheme();
             initializeEventListeners();
             
-            // Check if first visit
-            const hasSeenWelcome = localStorage.getItem('sf_welcome_seen');
-            if (!hasSeenWelcome) {
-                showWelcomeScreen();
-            } else {
-                showApp();
-            }
+            // Always show welcome screen on site open
+            showWelcomeScreen();
         });
 
         // Theme Management
         function initializeTheme() {
             const savedTheme = localStorage.getItem('sf_theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             
-            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+            // Always default to light theme unless user explicitly chose dark
+            if (savedTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
             } else {
                 document.documentElement.setAttribute('data-theme', 'light');

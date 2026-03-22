@@ -3590,16 +3590,29 @@
                         </div>
                         <div class="timer-controls">
                             <button class="btn btn-primary" id="startTimerBtn" aria-label="Start timer">
-                                <span>▶</span> Start
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                                Start
                             </button>
                             <button class="btn btn-secondary hidden" id="pauseTimerBtn" aria-label="Pause timer">
-                                <span>⏸</span> Pause
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                                    <rect x="6" y="4" width="4" height="16"></rect>
+                                    <rect x="14" y="4" width="4" height="16"></rect>
+                                </svg>
+                                Pause
                             </button>
                             <button class="btn btn-secondary hidden" id="resumeTimerBtn" aria-label="Resume timer">
-                                <span>▶</span> Resume
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                                Resume
                             </button>
                             <button class="btn btn-danger" id="stopTimerBtn" disabled aria-label="Stop timer">
-                                <span>⏹</span> Stop
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                                    <rect x="6" y="6" width="12" height="12" rx="2"></rect>
+                                </svg>
+                                Stop
                             </button>
                         </div>
                     </div>
@@ -4414,7 +4427,12 @@
             if (displayTasks.length === 0) {
                 container.innerHTML = `
                     <div class="empty-state">
-                        <div class="empty-state-icon">📝</div>
+                        <div class="empty-state-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9e9e9e" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 11l3 3L22 4"></path>
+                                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+                            </svg>
+                        </div>
                         <div class="empty-state-title">No tasks yet</div>
                         <div class="empty-state-text">Add tasks to your subjects to see them here</div>
                     </div>
@@ -4566,10 +4584,16 @@
                         </div>
                         <div class="subject-actions">
                             <button class="btn btn-sm btn-icon btn-secondary add-task-btn" data-subject-id="${subject.id}" aria-label="Add task to ${subject.name}">
-                                +
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                </svg>
                             </button>
                             <button class="btn btn-sm btn-icon btn-danger delete-subject-btn" data-subject-id="${subject.id}" aria-label="Delete ${subject.name}">
-                                ×
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                                </svg>
                             </button>
                         </div>
                     </div>
@@ -4623,20 +4647,20 @@
             return `
                 <div class="task-item">
                     <div class="task-checkbox ${statusClass}" role="checkbox" aria-checked="${task.status === 'done'}" data-task-id="${task.id}">
-                        ${task.status === 'done' ? '✓' : ''}
+                        ${task.status === 'done' ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>' : ''}
                     </div>
                     <div class="task-content">
                         <div class="task-title ${statusClass}">${escapeHtml(task.title)}</div>
                         <div class="task-meta">
                             <span class="task-badge ${priorityClass}">${task.priority}</span>
                             <span class="task-time">${task.estimatedTime} min</span>
-                            ${subject ? `<span class="task-subject-indicator" style="color: ${subject.color}">● ${escapeHtml(subject.name)}</span>` : ''}
+                            ${subject ? `<span class="task-subject-indicator" style="color: ${subject.color}"><svg width="8" height="8" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px; vertical-align: middle;"><circle cx="12" cy="12" r="12"></circle></svg>${escapeHtml(subject.name)}</span>` : ''}
                         </div>
                     </div>
                     <div class="status-toggle" data-task-id="${task.id}" role="button" tabindex="0" aria-label="Change status: currently ${statusText}">
                         <span class="task-status-badge ${task.status}">${statusText}</span>
                     </div>
-                    ${showDelete ? `<div class="task-actions"><button class="btn btn-sm btn-icon btn-secondary edit-task-btn" data-task-id="${task.id}" aria-label="Edit task">✎</button><button class="btn btn-sm btn-icon btn-danger delete-task-btn" data-task-id="${task.id}" aria-label="Delete task">×</button></div>` : ''}
+                    ${showDelete ? `<div class="task-actions"><button class="btn btn-sm btn-icon btn-secondary edit-task-btn" data-task-id="${task.id}" aria-label="Edit task"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></button><button class="btn btn-sm btn-icon btn-danger delete-task-btn" data-task-id="${task.id}" aria-label="Delete task"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button></div>` : ''}
                 </div>
             `;
         }

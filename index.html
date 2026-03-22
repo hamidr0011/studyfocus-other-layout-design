@@ -1917,6 +1917,11 @@
             flex-direction: column;
         }
 
+        /* Bottom Navigation - Hidden by default (desktop) */
+        .bottom-nav {
+            display: none;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             :root {
@@ -3592,10 +3597,10 @@
             const savedTheme = localStorage.getItem('sf_theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             
-            if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
-                document.documentElement.setAttribute('data-theme', 'light');
-            } else {
+            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
                 document.documentElement.setAttribute('data-theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
             }
         }
 

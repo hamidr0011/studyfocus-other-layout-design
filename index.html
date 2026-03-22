@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2835,6 +2835,10 @@
             transform: translateY(0);
         }
 
+        /* ============================================
+           COMPREHENSIVE SAMSUNG ONE UI ANIMATIONS
+           ============================================ */
+
         /* Page Transitions - Samsung One UI Professional Animation */
         .page-section {
             display: none;
@@ -2949,6 +2953,372 @@
             }
         }
 
+        /* Subject Cards Stagger Animation */
+        .subject-card {
+            opacity: 0;
+            transform: translateY(40px) scale(0.92);
+            animation: subject-card-enter 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+
+        .subject-card:nth-child(1) { animation-delay: 0ms; }
+        .subject-card:nth-child(2) { animation-delay: 60ms; }
+        .subject-card:nth-child(3) { animation-delay: 120ms; }
+        .subject-card:nth-child(4) { animation-delay: 180ms; }
+        .subject-card:nth-child(5) { animation-delay: 240ms; }
+        .subject-card:nth-child(6) { animation-delay: 300ms; }
+        .subject-card:nth-child(7) { animation-delay: 360ms; }
+        .subject-card:nth-child(8) { animation-delay: 420ms; }
+
+        @keyframes subject-card-enter {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.92);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Add Subject Card Animation */
+        .add-subject-card {
+            opacity: 0;
+            transform: scale(0.9);
+            animation: add-card-enter 500ms cubic-bezier(0.22, 1, 0.36, 1) 400ms forwards;
+            will-change: transform, opacity;
+        }
+
+        @keyframes add-card-enter {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Task Items Stagger Animation */
+        .task-item {
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: task-item-enter 400ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+
+        .task-list .task-item:nth-child(1) { animation-delay: 0ms; }
+        .task-list .task-item:nth-child(2) { animation-delay: 50ms; }
+        .task-list .task-item:nth-child(3) { animation-delay: 100ms; }
+        .task-list .task-item:nth-child(4) { animation-delay: 150ms; }
+        .task-list .task-item:nth-child(5) { animation-delay: 200ms; }
+        .task-list .task-item:nth-child(6) { animation-delay: 250ms; }
+
+        @keyframes task-item-enter {
+            0% {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Stat Cards Animation */
+        .stat-card {
+            opacity: 0;
+            transform: translateY(30px) scale(0.9);
+            animation: stat-card-enter 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            will-change: transform, opacity;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0ms; }
+        .stat-card:nth-child(2) { animation-delay: 80ms; }
+        .stat-card:nth-child(3) { animation-delay: 160ms; }
+
+        @keyframes stat-card-enter {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* FAB Animation */
+        .fab {
+            opacity: 0;
+            transform: scale(0) rotate(-45deg);
+            animation: fab-enter 500ms cubic-bezier(0.34, 1.56, 0.64, 1) 600ms forwards;
+            will-change: transform, opacity;
+        }
+
+        @keyframes fab-enter {
+            0% {
+                opacity: 0;
+                transform: scale(0) rotate(-45deg);
+            }
+            70% {
+                transform: scale(1.1) rotate(5deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        /* FAB Pulse Animation on Hover */
+        .fab:hover {
+            animation: fab-pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes fab-pulse {
+            0%, 100% {
+                box-shadow: 0 4px 16px rgba(20, 40, 160, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
+            }
+            50% {
+                box-shadow: 0 6px 24px rgba(20, 40, 160, 0.7), 0 4px 12px rgba(0, 0, 0, 0.4);
+            }
+        }
+
+        /* Modal Animations */
+        .modal-overlay {
+            opacity: 0;
+            transition: opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+        }
+
+        .modal {
+            opacity: 0;
+            transform: scale(0.9) translateY(30px);
+            transition: all 350ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .modal-overlay.active .modal {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Bottom Sheet Animation for Mobile */
+        @media (max-width: 480px) {
+            .modal {
+                transform: translateY(100%);
+                transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
+            }
+
+            .modal-overlay.active .modal {
+                transform: translateY(0);
+            }
+        }
+
+        /* Toast Notification Animation */
+        .toast {
+            opacity: 0;
+            transform: translateY(20px) scale(0.95);
+            transition: all 300ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Button Press Feedback - Samsung Style */
+        .btn {
+            transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn:active {
+            transform: scale(0.96);
+            transition-duration: 100ms;
+        }
+
+        /* Nav Item Transitions */
+        .nav-item {
+            transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--samsung-blue), var(--samsung-blue-light));
+            opacity: 0;
+            transition: opacity 200ms ease;
+            z-index: -1;
+            border-radius: var(--radius-md);
+        }
+
+        .nav-item.active::before {
+            opacity: 1;
+        }
+
+        /* Bottom Nav Item Animation */
+        .bottom-nav-item {
+            transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .bottom-nav-item:active {
+            transform: scale(0.9);
+        }
+
+        .bottom-nav-item.active .bottom-nav-icon {
+            animation: nav-icon-bounce 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes nav-icon-bounce {
+            0% { transform: scale(1) translateY(0); }
+            50% { transform: scale(1.2) translateY(-4px); }
+            100% { transform: scale(1.15) translateY(-4px); }
+        }
+
+        /* Progress Bar Animation */
+        .progress-bar {
+            transition: width 600ms cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: progress-shimmer 2s infinite;
+        }
+
+        @keyframes progress-shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Empty State Animation */
+        .empty-state {
+            opacity: 0;
+            animation: empty-state-enter 500ms cubic-bezier(0.22, 1, 0.36, 1) 300ms forwards;
+        }
+
+        @keyframes empty-state-enter {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Form Input Focus Animation */
+        .form-input,
+        .form-select,
+        .form-textarea {
+            transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            transform: scale(1.02);
+        }
+
+        /* Logo Hover Animation */
+        .logo {
+            transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .logo:hover {
+            transform: scale(1.02);
+        }
+
+        /* Streak Bar Animation */
+        .streak-bar {
+            transition: all 400ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .streak-bar[data-active="true"] {
+            animation: streak-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes streak-pulse {
+            0%, 100% {
+                box-shadow: 0 0 12px rgba(255, 171, 0, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 171, 0, 0.7);
+            }
+        }
+
+        /* Theme Toggle Animation */
+        .theme-toggle-btn {
+            transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .theme-toggle-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Welcome Screen Animation */
+        .welcome-screen {
+            animation: welcome-fade-in 500ms cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes welcome-fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .welcome-screen.hidden {
+            animation: welcome-fade-out 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes welcome-fade-out {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        /* Task Checkbox Animation */
+        .task-checkbox {
+            transition: all 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .task-checkbox:active {
+            transform: scale(0.85);
+        }
+
+        /* Page Header Animation */
+        .page-header-content {
+            animation: header-enter 500ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes header-enter {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Smooth Scrolling - Samsung Style */
         html {
             scroll-behavior: smooth;
@@ -2961,7 +3331,10 @@
         .bottom-nav-item,
         .nav-item,
         .btn,
-        .card {
+        .card,
+        .subject-card,
+        .task-item,
+        .stat-card {
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
         }
@@ -2978,11 +3351,20 @@
             
             .page-section,
             .card,
-            .welcome-content > * {
+            .subject-card,
+            .task-item,
+            .stat-card,
+            .welcome-content > *,
+            .fab,
+            .empty-state {
                 animation: none !important;
                 opacity: 1 !important;
                 transform: none !important;
                 filter: none !important;
+            }
+
+            .progress-bar::after {
+                display: none;
             }
         }
     </style>
@@ -3696,14 +4078,9 @@
 
         // Theme Management
         function initializeTheme() {
-            const savedTheme = localStorage.getItem('sf_theme');
-            
-            // Always default to light theme unless user explicitly chose dark
-            if (savedTheme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'dark');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'light');
-            }
+            // Always set light theme on site load
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('sf_theme', 'light');
         }
 
         function toggleTheme() {

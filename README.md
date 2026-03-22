@@ -21,13 +21,13 @@ StudyFocus is a web-based study companion that helps you:
 ### Running the Application
 
 1. **Open the file directly in your browser:**
-   Simply double-click `studyfocus.html` or right-click → Open with browser
+   Simply double-click `index.html` or right-click → Open with browser
 
 2. **Or run a local server (optional):**
    ```bash
    python -m http.server 8080
    ```
-   Then visit `http://localhost:8080/studyfocus.html`
+   Then visit `http://localhost:8080/index.html`
 
 No installation required. All data is stored locally in your browser.
 
@@ -91,7 +91,7 @@ StudyFocus stores all your data locally in your browser using localStorage. This
 
 | File | Description |
 |------|-------------|
-| `studyfocus.html` | Main application file (single-file app) |
+| `index.html` | Main application file (single-file app) |
 | `README.md` | This documentation file |
 
 ---

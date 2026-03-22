@@ -588,11 +588,11 @@
             font-size: 1rem;
         }
 
-        /* Floating Action Button (FAB) - Samsung Style */
+        /* Floating Action Button (FAB) - Samsung One UI Style */
         .fab {
-            position: fixed;
-            bottom: 32px;
-            right: 32px;
+            position: absolute;
+            bottom: 24px;
+            right: 24px;
             width: 56px;
             height: 56px;
             border-radius: 50%;
@@ -604,9 +604,18 @@
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            box-shadow: 0 4px 12px rgba(20, 40, 160, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 16px rgba(20, 40, 160, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
             transition: all var(--transition-base);
             z-index: 100;
+            overflow: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .fab svg {
+            width: 24px;
+            height: 24px;
+            stroke-width: 2.5;
+            pointer-events: none;
         }
 
         .fab:hover {
@@ -620,9 +629,9 @@
         }
 
         .fab-label {
-            position: fixed;
-            bottom: 44px;
-            right: 100px;
+            position: absolute;
+            bottom: 36px;
+            right: 92px;
             background: var(--surface-2);
             color: var(--text-primary);
             padding: 8px 16px;
@@ -635,6 +644,7 @@
             pointer-events: none;
             white-space: nowrap;
             box-shadow: var(--shadow-md);
+            z-index: 99;
         }
 
         .fab:hover + .fab-label,
@@ -1396,6 +1406,16 @@
         }
 
         /* Subject Cards - Samsung Style */
+        .subject-card {
+            background: linear-gradient(145deg, var(--surface-1) 0%, var(--surface-2) 100%);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--surface-3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all var(--transition-base);
+        }
+
         .subject-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
@@ -1408,6 +1428,15 @@
             align-items: center;
             gap: var(--spacing-md);
             border-bottom: 1px solid var(--surface-2);
+            justify-content: space-between;
+        }
+
+        .subject-header-left {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            flex: 1;
+            min-width: 0;
         }
 
         .subject-color {
@@ -1420,17 +1449,28 @@
 
         .subject-name {
             font-weight: 600;
-            font-size: 0.9375rem;
+            font-size: 1rem;
             flex: 1;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
             color: var(--text-primary);
+            line-height: 1.4;
         }
 
         .subject-actions {
             display: flex;
             gap: var(--spacing-xs);
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .subject-actions .btn-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-md);
+            font-size: 1.25rem;
+            line-height: 1;
         }
 
         .subject-stats {
@@ -1438,18 +1478,24 @@
             gap: var(--spacing-lg);
             padding: var(--spacing-md) var(--spacing-lg);
             background: var(--surface-1);
-            font-size: 0.8125rem;
+            font-size: 0.875rem;
+            border-top: 1px solid var(--surface-2);
+            margin-top: auto;
         }
 
         .subject-stat {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
             color: var(--text-muted);
         }
 
+        .subject-stat svg {
+            flex-shrink: 0;
+        }
+
         .subject-stat-value {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-primary);
         }
 
@@ -1523,6 +1569,14 @@
             font-size: 0.9375rem;
             color: var(--text-secondary);
             font-weight: 500;
+        }
+
+        /* Subjects Grid - Desktop */
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+            padding-bottom: 100px;
         }
 
         /* Analytics - Samsung Style */
@@ -1955,6 +2009,9 @@
 
             .page-header-content {
                 flex: 1;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
             }
 
             .mobile-theme-toggle {
@@ -1995,6 +2052,41 @@
             .subjects-grid, .dashboard-grid, .analytics-grid {
                 grid-template-columns: 1fr !important;
                 gap: var(--spacing-md);
+            }
+
+            /* Mobile Subject Cards */
+            .subject-card {
+                border-radius: var(--radius-lg);
+                box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .subject-header {
+                padding: var(--spacing-md) var(--spacing-lg);
+            }
+
+            .subject-name {
+                font-size: 1.0625rem;
+            }
+
+            .subject-actions .btn-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 1.375rem;
+            }
+
+            .subject-stats {
+                padding: var(--spacing-sm) var(--spacing-lg);
+                font-size: 0.9375rem;
+                gap: var(--spacing-xl);
+            }
+
+            .subject-stat {
+                gap: 8px;
+            }
+
+            .subject-stat svg {
+                width: 18px;
+                height: 18px;
             }
 
             .card {
@@ -2041,12 +2133,14 @@
                 justify-content: center;
             }
 
-            /* Touch-friendly FAB */
+            /* Samsung One UI Mobile FAB - Positioned within section */
             .fab {
-                bottom: 90px; /* Above bottom nav */
-                right: 20px;
-                width: 64px;
-                height: 64px;
+                position: absolute;
+                bottom: 16px;
+                right: 16px;
+                width: 56px;
+                height: 56px;
+                z-index: 100;
                 box-shadow: 0 6px 20px rgba(20, 40, 160, 0.5);
             }
 
@@ -2055,8 +2149,10 @@
             }
 
             .fab-label {
-                bottom: 102px;
-                right: 88px;
+                position: absolute;
+                bottom: 28px;
+                right: 84px;
+                z-index: 99;
             }
 
             /* Samsung Bottom Navigation Bar - Enhanced */
@@ -2366,7 +2462,10 @@
                 }
 
                 .fab {
-                    bottom: 70px;
+                    position: absolute;
+                    bottom: 16px;
+                    right: 16px;
+                    z-index: 100;
                 }
 
                 .main-content {
@@ -2744,6 +2843,8 @@
             filter: blur(4px);
             will-change: transform, opacity, filter;
             backface-visibility: hidden;
+            position: relative;
+            min-height: 100%;
         }
 
         .page-section.active {
@@ -3154,8 +3255,10 @@
             <!-- Subjects Page -->
             <section class="page-section" id="subjects">
                 <div class="page-header">
-                    <h1 class="page-title">Subjects</h1>
-                    <p class="page-subtitle">Manage your subjects and tasks</p>
+                    <div class="page-header-content">
+                        <h1 class="page-title">Subjects</h1>
+                        <p class="page-subtitle">Manage your subjects and tasks</p>
+                    </div>
                 </div>
                 
                 <div class="subjects-grid" id="subjectsGrid">
@@ -3175,8 +3278,10 @@
             <!-- Tasks Page -->
             <section class="page-section" id="tasks">
                 <div class="page-header">
-                    <h1 class="page-title">All Tasks</h1>
-                    <p class="page-subtitle">Manage and organize your tasks</p>
+                    <div class="page-header-content">
+                        <h1 class="page-title">All Tasks</h1>
+                        <p class="page-subtitle">Manage and organize your tasks</p>
+                    </div>
                 </div>
                 
                 <div class="tasks-container">
@@ -3249,8 +3354,10 @@
             <!-- Analytics Page -->
             <section class="page-section" id="analytics">
                 <div class="page-header">
-                    <h1 class="page-title">Analytics</h1>
-                    <p class="page-subtitle">Track your study performance</p>
+                    <div class="page-header-content">
+                        <h1 class="page-title">Analytics</h1>
+                        <p class="page-subtitle">Track your study performance</p>
+                    </div>
                 </div>
                 
                 <div class="analytics-grid">
@@ -4076,8 +4183,10 @@
                 card.dataset.subjectId = subject.id;
                 card.innerHTML = `
                     <div class="subject-header">
-                        <div class="subject-color" style="background-color: ${subject.color}"></div>
-                        <div class="subject-name">${escapeHtml(subject.name)}</div>
+                        <div class="subject-header-left">
+                            <div class="subject-color" style="background-color: ${subject.color}"></div>
+                            <div class="subject-name">${escapeHtml(subject.name)}</div>
+                        </div>
                         <div class="subject-actions">
                             <button class="btn btn-sm btn-icon btn-secondary add-task-btn" data-subject-id="${subject.id}" aria-label="Add task to ${subject.name}">
                                 +
@@ -4103,13 +4212,6 @@
                             <span><span class="subject-stat-value">${totalHours}</span> hrs</span>
                         </div>
                     </div>
-                    <div class="subject-content">
-                        <div class="subject-notes">
-                            <label class="form-label">Quick Notes</label>
-                            <textarea class="form-textarea notes-textarea" placeholder="Jot down reminders, formulas..." 
-                                data-subject-id="${subject.id}">${escapeHtml(notes[subject.id] || '')}</textarea>
-                        </div>
-                    </div>
                 `;
                 grid.appendChild(card);
             });
@@ -4132,13 +4234,6 @@
                 btn.addEventListener('click', () => {
                     const subjectId = btn.dataset.subjectId;
                     confirmDeleteSubject(subjectId);
-                });
-            });
-
-            grid.querySelectorAll('.notes-textarea').forEach(textarea => {
-                textarea.addEventListener('input', () => {
-                    const subjectId = textarea.dataset.subjectId;
-                    saveNoteDelayed(subjectId, textarea.value);
                 });
             });
         }

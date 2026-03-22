@@ -160,6 +160,19 @@
             transition: transform var(--transition-fast);
         }
 
+        .logo-icon.samsung-style {
+            background: linear-gradient(135deg, #4a90d9, #1a4a7a);
+            border-radius: 22%;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(26, 74, 122, 0.4);
+        }
+
+        .logo-icon.samsung-style img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .logo-icon:hover {
             transform: scale(1.05);
         }
@@ -1763,6 +1776,33 @@
             color: var(--text-primary);
         }
 
+        /* Toast Close Button - Samsung Style */
+        .toast-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-radius: var(--radius-sm);
+            transition: all var(--transition-fast);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 28px;
+            min-height: 28px;
+        }
+
+        .toast-close-btn:hover {
+            background: var(--surface-3);
+            color: var(--text-primary);
+            transform: scale(1.1);
+        }
+
+        .toast-close-btn:active {
+            transform: scale(0.95);
+        }
+
         /* Empty State - Samsung Style */
         .empty-state {
             text-align: center;
@@ -1820,9 +1860,61 @@
             width: 120px;
         }
 
-        /* Bottom Navigation - Hidden by default (desktop) */
-        .bottom-nav {
+
+        /* Mobile Theme Toggle - Dashboard Header (Instagram-style) */
+        .mobile-theme-toggle {
             display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+        }
+
+        .mobile-theme-toggle:hover {
+            background: var(--surface-2);
+            color: var(--text-primary);
+        }
+
+        .mobile-theme-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .mobile-theme-toggle .theme-icon-light,
+        .mobile-theme-toggle .theme-icon-dark {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        [data-theme="light"] .mobile-theme-toggle .theme-icon-light {
+            display: flex;
+        }
+
+        [data-theme="light"] .mobile-theme-toggle .theme-icon-dark {
+            display: none;
+        }
+
+        [data-theme="dark"] .mobile-theme-toggle .theme-icon-light,
+        .mobile-theme-toggle .theme-icon-light {
+            display: none;
+        }
+
+        [data-theme="dark"] .mobile-theme-toggle .theme-icon-dark,
+        .mobile-theme-toggle .theme-icon-dark {
+            display: flex;
+        }
+
+        /* Page Header Layout for Dashboard */
+        .page-header {
+            position: relative;
+        }
+
+        .page-header-content {
+            display: flex;
+            flex-direction: column;
         }
 
         /* Responsive */
@@ -1850,9 +1942,24 @@
                 background: transparent;
                 margin-bottom: var(--spacing-md);
                 display: flex;
-                flex-direction: column;
-                justify-content: flex-end;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-end;
                 min-height: 200px;
+            }
+
+            .page-header-content {
+                flex: 1;
+            }
+
+            .mobile-theme-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 44px;
+                height: 44px;
+                margin-left: 12px;
+                margin-bottom: 8px;
             }
 
             .page-title {
@@ -2303,6 +2410,53 @@
                 -webkit-overflow-scrolling: touch;
             }
 
+            /* Mobile Animation Optimizations - Smoother on low-end devices */
+            @media (max-width: 768px) {
+                .page-section {
+                    filter: none !important;
+                }
+                
+                .page-section.active {
+                    animation: page-enter-mobile 350ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+                }
+                
+                @keyframes page-enter-mobile {
+                    0% {
+                        opacity: 0;
+                        transform: translateY(15px);
+                    }
+                    100% {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+                
+                .card {
+                    animation-duration: 400ms;
+                    will-change: auto;
+                }
+                
+                .welcome-content > * {
+                    animation-duration: 500ms;
+                    will-change: auto;
+                }
+                
+                /* Disable complex blur effects on mobile */
+                .modal-overlay {
+                    backdrop-filter: none;
+                    -webkit-backdrop-filter: none;
+                }
+                
+                /* Simpler toast animation */
+                .toast {
+                    transform: translateY(100%);
+                }
+                
+                .toast.show {
+                    transform: translateY(0);
+                }
+            }
+
             /* Mobile safe area support for notched devices */
             @supports (padding-top: env(safe-area-inset-top)) {
                 .main-content {
@@ -2315,6 +2469,112 @@
             .mobile-menu-btn {
                 display: none;
             }
+        }
+
+        /* Theme Toggle - Samsung One UI Style */
+        .theme-toggle-container {
+            margin-top: var(--spacing-md);
+            padding: var(--spacing-sm);
+        }
+
+        .theme-toggle-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: 12px 16px;
+            border-radius: var(--radius-md);
+            background: var(--surface-2);
+            border: 1px solid var(--surface-3);
+            color: var(--text-secondary);
+            cursor: pointer;
+            width: 100%;
+            transition: all var(--transition-fast);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.9375rem;
+            font-weight: 500;
+        }
+
+        .theme-toggle-btn:hover {
+            background: var(--surface-3);
+            color: var(--text-primary);
+        }
+
+        .theme-toggle-btn:active {
+            transform: scale(0.98);
+        }
+
+        .theme-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
+            height: 20px;
+        }
+
+        .theme-icon.light-icon {
+            display: none;
+        }
+
+        .theme-icon.dark-icon {
+            display: flex;
+        }
+
+        [data-theme="light"] .theme-icon.light-icon {
+            display: flex;
+        }
+
+        [data-theme="light"] .theme-icon.dark-icon {
+            display: none;
+        }
+
+        .theme-label {
+            flex: 1;
+            text-align: left;
+        }
+
+        /* Light Theme Variables */
+        [data-theme="light"] {
+            --bg-primary: #f5f5f5;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e8e8e8;
+            --bg-elevated: #ffffff;
+            --bg-hover: #f0f0f0;
+            
+            --surface-1: #ffffff;
+            --surface-2: #f8f8f8;
+            --surface-3: #e0e0e0;
+            
+            --text-primary: #1a1a1a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #7a7a7a;
+            --text-disabled: #9a9a9a;
+            
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(20, 40, 160, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(20, 40, 160, 0.08);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15), 0 4px 6px rgba(20, 40, 160, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.2), 0 8px 10px rgba(20, 40, 160, 0.12);
+        }
+
+        [data-theme="light"] .sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            border-right: 1px solid var(--surface-3);
+        }
+
+        [data-theme="light"] .bottom-nav {
+            background: rgba(255, 255, 255, 0.95);
+            border-top: 1px solid var(--surface-3);
+        }
+
+        [data-theme="light"] .card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8f8f8 100%);
+            border: 1px solid var(--surface-3);
+        }
+
+        [data-theme="light"] .form-input,
+        [data-theme="light"] .form-select,
+        [data-theme="light"] .form-textarea {
+            background: #ffffff;
+            border: 1px solid var(--surface-3);
         }
 
         /* Screen Reader Only */
@@ -2363,81 +2623,315 @@
             background: var(--bg-hover);
         }
 
-        /* Page Transitions - Samsung One UI */
+        /* Samsung One UI Welcome Screen */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: welcome-fade-in 0.5s ease;
+        }
+
+        .welcome-screen.hidden {
+            animation: welcome-fade-out 0.4s ease forwards;
+        }
+
+        @keyframes welcome-fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes welcome-fade-out {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        .welcome-content {
+            text-align: center;
+            padding: var(--spacing-xl);
+            max-width: 400px;
+        }
+
+        .welcome-logo {
+            margin-bottom: var(--spacing-xl);
+            filter: drop-shadow(0 8px 24px rgba(20, 40, 160, 0.4));
+        }
+
+        .welcome-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: var(--spacing-sm);
+            background: linear-gradient(135deg, var(--samsung-blue-light), var(--samsung-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .welcome-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .welcome-features {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+            text-align: left;
+        }
+
+        .welcome-feature {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: var(--surface-1);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--surface-3);
+            color: var(--text-secondary);
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+
+        .welcome-feature:hover {
+            transform: translateX(4px);
+            border-color: var(--samsung-blue);
+        }
+
+        .welcome-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-sm);
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--samsung-blue), var(--samsung-blue-light));
+            color: white;
+            border: none;
+            border-radius: var(--radius-full);
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            box-shadow: 0 4px 16px rgba(20, 40, 160, 0.4);
+        }
+
+        .welcome-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(20, 40, 160, 0.5);
+        }
+
+        .welcome-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Page Transitions - Samsung One UI Professional Animation */
         .page-section {
             display: none;
-            animation: page-enter 300ms var(--transition-smooth);
+            opacity: 0;
+            transform: scale(0.96) translateY(20px);
+            filter: blur(4px);
+            will-change: transform, opacity, filter;
+            backface-visibility: hidden;
         }
 
         .page-section.active {
             display: block;
+            animation: page-enter 400ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         @keyframes page-enter {
-            from {
+            0% {
                 opacity: 0;
-                transform: translateX(20px);
+                transform: scale(0.96) translateY(20px);
+                filter: blur(4px);
             }
-            to {
+            50% {
+                filter: blur(2px);
+            }
+            100% {
                 opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes page-exit {
-            from {
-                opacity: 1;
-                transform: translateX(0);
-            }
-            to {
-                opacity: 0;
-                transform: translateX(-20px);
+                transform: scale(1) translateY(0);
+                filter: blur(0);
             }
         }
 
         .page-section.exiting {
-            animation: page-exit 200ms var(--transition-smooth);
+            animation: page-exit 300ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes page-exit {
+            0% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                filter: blur(0);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.98) translateY(-10px);
+                filter: blur(4px);
+            }
+        }
+
+        /* Card Stagger Animation - Samsung One UI Style */
+        .card {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            animation: card-enter 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+
+        .card:nth-child(1) { animation-delay: 0ms; }
+        .card:nth-child(2) { animation-delay: 80ms; }
+        .card:nth-child(3) { animation-delay: 160ms; }
+        .card:nth-child(4) { animation-delay: 240ms; }
+        .card:nth-child(5) { animation-delay: 320ms; }
+
+        @keyframes card-enter {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Welcome Content Stagger Animation */
+        .welcome-content > * {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: welcome-item-enter 600ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            will-change: transform, opacity;
+            backface-visibility: hidden;
+        }
+
+        .welcome-content > *:nth-child(1) { animation-delay: 100ms; }
+        .welcome-content > *:nth-child(2) { animation-delay: 200ms; }
+        .welcome-content > *:nth-child(3) { animation-delay: 300ms; }
+        .welcome-content > *:nth-child(4) { animation-delay: 400ms; }
+        .welcome-content > *:nth-child(5) { animation-delay: 500ms; }
+
+        @keyframes welcome-item-enter {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Samsung One UI Ripple Effect */
+        @keyframes ripple {
+            0% {
+                transform: scale(0);
+                opacity: 0.4;
+            }
+            100% {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Smooth Scrolling - Samsung Style */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* GPU Acceleration for animated elements */
+        .toast,
+        .modal,
+        .fab,
+        .bottom-nav-item,
+        .nav-item,
+        .btn,
+        .card {
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+        }
+
+        /* Reduced Motion Support - Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            .page-section,
+            .card,
+            .welcome-content > * {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+            }
         }
     </style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <div class="app-container">
+
+    <!-- Samsung One UI Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-content">
+            <div class="welcome-logo samsung-style">
+                <img src="logo_cropped_processed_by_imagy (1).png" alt="StudyFocus Logo" width="72" height="72">
+            </div>
+            <h1 class="welcome-title">StudyFocus</h1>
+            <p class="welcome-subtitle">Your personal study companion</p>
+            <div class="welcome-features">
+                <div class="welcome-feature">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1428a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12,6 12,12 16,14"></polyline>
+                    </svg>
+                    <span>Track Study Time</span>
+                </div>
+                <div class="welcome-feature">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1428a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 11l3 3L22 4"></path>
+                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+                    </svg>
+                    <span>Manage Tasks</span>
+                </div>
+                <div class="welcome-feature">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1428a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                    <span>View Analytics</span>
+                </div>
+            </div>
+            <button class="welcome-btn" id="welcomeBtn">
+                <span>Get Started</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12,5 19,12 12,19"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="app-container" id="appContainer" style="display: none;">
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="logo">
-                <div class="logo-icon">
-                    <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
-                        <!-- Samsung-style elliptical background -->
-                        <defs>
-                            <linearGradient id="logoGradient" x1="4" y1="4" x2="40" y2="40" gradientUnits="userSpaceOnUse">
-                                <stop offset="0%" stop-color="#1428a0"/>
-                                <stop offset="100%" stop-color="#1e3fc7"/>
-                            </linearGradient>
-                            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                                <feGaussianBlur stdDeviation="2" result="blur"/>
-                                <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-                            </filter>
-                        </defs>
-                        
-                        <!-- Main elliptical shape (Samsung style) -->
-                        <ellipse cx="22" cy="22" rx="18" ry="16" fill="url(#logoGradient)"/>
-                        
-                        <!-- StudyFocus icon: Open book with clock -->
-                        <g stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none">
-                            <!-- Book pages -->
-                            <path d="M14 18V28C14 28 17 30 22 30C27 30 30 28 30 28V18" opacity="0.95"/>
-                            <!-- Book spine/clock circle -->
-                            <circle cx="22" cy="22" r="6" opacity="0.9"/>
-                            <!-- Clock hands -->
-                            <path d="M22 19V22L24 24" opacity="0.9"/>
-                            <!-- Book center fold -->
-                            <path d="M22 18V30" opacity="0.7"/>
-                        </g>
-                        
-                        <!-- Samsung-style subtle shine -->
-                        <ellipse cx="16" cy="14" rx="6" ry="4" fill="white" opacity="0.15"/>
-                    </svg>
+                <div class="logo-icon samsung-style">
+                    <img src="logo_cropped_processed_by_imagy.png" alt="StudyFocus Logo" width="40" height="40">
                 </div>
                 <span>StudyFocus</span>
             </div>
@@ -2513,6 +3007,31 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Theme Toggle - Samsung One UI Style -->
+            <div class="theme-toggle-container">
+                <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Toggle dark/light theme">
+                    <span class="theme-icon light-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    </span>
+                    <span class="theme-icon dark-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </span>
+                    <span class="theme-label">Theme</span>
+                </button>
+            </div>
         </aside>
 
         <!-- Main Content -->
@@ -2520,8 +3039,30 @@
             <!-- Dashboard Page -->
             <section class="page-section active" id="dashboard">
                 <div class="page-header">
-                    <h1 class="page-title">Dashboard</h1>
-                    <p class="page-subtitle">Track your progress and stay focused</p>
+                    <div class="page-header-content">
+                        <h1 class="page-title">Dashboard</h1>
+                        <p class="page-subtitle">Track your progress and stay focused</p>
+                    </div>
+                    <button class="mobile-theme-toggle" id="mobileDashboardThemeToggle" aria-label="Toggle theme">
+                        <span class="theme-icon-light">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="5"></circle>
+                                <line x1="12" y1="1" x2="12" y2="3"></line>
+                                <line x1="12" y1="21" x2="12" y2="23"></line>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                <line x1="1" y1="12" x2="3" y2="12"></line>
+                                <line x1="21" y1="12" x2="23" y2="12"></line>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                            </svg>
+                        </span>
+                        <span class="theme-icon-dark">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                            </svg>
+                        </span>
+                    </button>
                 </div>
                 
                 <div class="dashboard-grid">
@@ -3034,9 +3575,56 @@
         // Initialize App
         document.addEventListener('DOMContentLoaded', () => {
             loadData();
+            initializeTheme();
             initializeEventListeners();
-            renderAll();
+            
+            // Check if first visit
+            const hasSeenWelcome = localStorage.getItem('sf_welcome_seen');
+            if (!hasSeenWelcome) {
+                showWelcomeScreen();
+            } else {
+                showApp();
+            }
         });
+
+        // Theme Management
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('sf_theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            
+            if (savedTheme === 'light' || (!savedTheme && !prefersDark)) {
+                document.documentElement.setAttribute('data-theme', 'light');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+            }
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('sf_theme', newTheme);
+            
+            showToast(`Switched to ${newTheme} mode`, 'info');
+        }
+
+        // Welcome Screen
+        function showWelcomeScreen() {
+            document.getElementById('welcomeScreen').classList.remove('hidden');
+            document.getElementById('appContainer').style.display = 'none';
+        }
+
+        function showApp() {
+            document.getElementById('welcomeScreen').classList.add('hidden');
+            document.getElementById('appContainer').style.display = 'flex';
+            renderAll();
+        }
+
+        function dismissWelcome() {
+            localStorage.setItem('sf_welcome_seen', 'true');
+            showApp();
+        }
 
         // Data Management
         function loadData() {
@@ -3206,10 +3794,19 @@
             });
 
             // Initialize ripple effects on all interactive elements
-            document.querySelectorAll('.btn, .nav-item, .fab, .color-option, .task-checkbox, .status-toggle, .bottom-nav-item').forEach(button => {
+            document.querySelectorAll('.btn, .nav-item, .fab, .color-option, .task-checkbox, .status-toggle, .bottom-nav-item, .mobile-theme-toggle').forEach(button => {
                 button.classList.add('ripple-container');
                 button.addEventListener('click', createRipple);
             });
+
+            // Welcome screen button
+            document.getElementById('welcomeBtn')?.addEventListener('click', dismissWelcome);
+
+            // Theme toggle button
+            document.getElementById('themeToggleBtn')?.addEventListener('click', toggleTheme);
+            
+            // Mobile dashboard theme toggle
+            document.getElementById('mobileDashboardThemeToggle')?.addEventListener('click', toggleTheme);
         }
 
         // Add ripple effect to all interactive elements
@@ -4434,7 +5031,19 @@
                 <span class="toast-icon">${icon}</span>
                 <span class="toast-message">${escapeHtml(message)}</span>
                 ${undoButton}
+                <button class="toast-close-btn" aria-label="Close notification">✕</button>
             `;
+            
+            // Add click handler for close button
+            const closeBtn = toast.querySelector('.toast-close-btn');
+            closeBtn.addEventListener('click', () => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+                if (undoToastTimeout) {
+                    clearTimeout(undoToastTimeout);
+                    undoToastTimeout = null;
+                }
+            });
             
             container.appendChild(toast);
             
